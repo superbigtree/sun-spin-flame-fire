@@ -32,6 +32,8 @@ var keyboard = new Keyboard(game);
 var huh = false;
 mouse.on('click', function(e){
   if (!huh) huh = true;
+  else huh = false;
+  if (oh > 0) oh = 0;
   game.backgroundColor = randomRGBA(0, 256, 0, 256, 0, 256, 0.3);
 });
 
@@ -100,8 +102,8 @@ box.update = function(interval){
   if ('A' in keyboard.keysDown) box.x -= box.speed;
   if ('D' in keyboard.keysDown) box.x += box.speed;
 
-  //if (box.x < 0) box.x = 0;
-  //if (box.y < 0) box.y = 0;
-  //if (box.x >= game.width - box.w) box.x = game.width - box.w;
-  //if (box.y >= game.height - box.h) box.y = game.height - box.h;
+  if (box.x < -box.width) box.x = game.width;
+  if (box.y < -box.height) box.y = game.height;
+  if (box.x >= game.width + box.width) box.x = -box.width;
+  if (box.y >= game.height + box.height) box.y = -box.height;
 }
