@@ -60,8 +60,8 @@ game.on('draw', function(c){
 });
 
 var box = {
-  x: 0,
-  y: 0,
+  x: game.width/2,
+  y: game.height/2,
   width: 40,
   height: 40,
   speed: 22,
