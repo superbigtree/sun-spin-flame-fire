@@ -29,7 +29,9 @@ var game = new Game({
 var mouse = new Mouse(game);
 var keyboard = new Keyboard(game);
 
+var huh = false;
 mouse.on('click', function(e){
+  if (!huh) huh = true;
   game.backgroundColor = randomRGBA(0, 256, 0, 256, 0, 256, 0.3);
 });
 
@@ -68,25 +70,28 @@ var box = {
   color: randomRGBA(15, 255, 15, 255, 15, 255, .95)
 }
 
-var oh = 100;
+var oh = 1;
 box.draw = function(c){
   for (var w=0; w<3; w++){
     c.save();
     c.translate(box.x, box.y)
     c.rotate(Math.PI/180 * randomInt(-180, 180));
     c.fillStyle = randomRGBA(255, 255, 255, 255, 15, 255, .25);
-    //c.fillRect(-box.width/2, -box.height/2, box.width, box.height);
+    c.fillRect(-box.width/2, -box.height/2, box.width, box.height);
     c.restore();
   }
-  for (var w=0; w<20; w++){
-    c.save();
-    c.translate(box.x, box.y)
-    c.rotate(Math.PI/20 * randomInt(-20, 20));
-    c.fillStyle = randomRGBA(200, 225, 20, 50, 0, 0, .35);
-    c.fillRect(-box.width/2, -box.height/2-30, randomInt(10, 80), randomInt(60, oh));
-    c.restore();
+
+  if (huh){
+    for (var w=0; w<20; w++){
+      c.save();
+      c.translate(box.x, box.y)
+      c.rotate(Math.PI/20 * randomInt(-20, 20));
+      c.fillStyle = randomRGBA(200, 225, 20, 50, 0, 0, .35);
+      c.fillRect(-box.width/2, -box.height/2-30, randomInt(10, 80), randomInt(60, oh));
+      c.restore();
+    }
+    oh+=10;
   }
-  oh+=50;
 }
 
 box.update = function(interval){
